@@ -142,7 +142,7 @@ class application:
 
         #creating button, which creates second page
         self.nextPageButton = ctk.CTkButton(self.firstPage, text="Continue", command=self.secondPage)
-        self.nextPageButton.pack(pady=10 ,padx=10)
+        self.nextPageButton.pack(pady=10)
 
         self.firstPage.pack()
 
