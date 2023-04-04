@@ -78,7 +78,7 @@ class application:
         selActor1.trace("w", self.updateActor1)
 
         #shows number of first actors found
-        self.actor1Result = ctk.CTkLabel(self.firstPage, text="Number of records: " + str(len(actorList)))
+        self.actor1Result = ctk.CTkLabel(self.firstPage, text="Number of records: " + str(len(actorList)-1))
         self.actor1Result.pack()
 
         #text before choosing second actor
@@ -92,10 +92,10 @@ class application:
         self.actor2Menu.set("None")
 
         #checking if user types anything in the actor2Menu and calling updateActor2 method if he did
-        selActor2.trace("w", self.updateActor2)
+        selActor2.trace("w", self.updateActor1)
 
         #shows number of second actor found
-        self.actor2Result = ctk.CTkLabel(self.firstPage, text="Number of records: " + str(len(actorList)))
+        self.actor2Result = ctk.CTkLabel(self.firstPage, text="Number of records: " + str(len(actorList)-1))
         self.actor2Result.pack()
 
         #text before choosing third actor
@@ -109,10 +109,10 @@ class application:
         self.actor3Menu.set("None")
 
         #checking if user types anything in the actor3Menu and calling updateActor3 method if he did
-        selActor3.trace("w", self.updateActor3)
+        selActor3.trace("w", self.updateActor1)
 
         #shows number of third actor found
-        self.actor3Result = ctk.CTkLabel(self.firstPage, text="Number of records: " + str(len(actorList)))
+        self.actor3Result = ctk.CTkLabel(self.firstPage, text="Number of records: " + str(len(actorList)-1))
         self.actor3Result.pack()
 
         #text before choosing genre
@@ -168,27 +168,47 @@ class application:
     #method that creates new listActorNew list and gets all values from ActorList that have string which user typed
     def updateActor1(self, *args):
         listActorNew = []
-        for i in actorList:
-            if self.actor1Menu.get().lower() in i.lower():
-                listActorNew.append(i)
+        if self.actor1Menu.get().lower() != "none":
+            for i in actorList:
+                if self.actor1Menu.get().lower() in i.lower() and i.lower() != self.actor2Menu.get().lower() and i.lower() != self.actor3Menu.get().lower():
+                    listActorNew.append(i)
+        else:
+            for i in actorList:
+                if i.lower() != self.actor2Menu.get().lower() and i.lower() != self.actor3Menu.get().lower():
+                    listActorNew.append(i)
+
         self.actor1Menu.configure(values=listActorNew)
         self.actor1Result.configure(text="Number of records: " + str(len(listActorNew)))
+        self.updateActor2()
 
     #method that creates new listActorNew list and gets all values from ActorList that have string which user typed
     def updateActor2(self, *args):
         listActorNew = []
-        for i in actorList:
-            if self.actor2Menu.get().lower() in i.lower():
-                listActorNew.append(i)
+        if self.actor2Menu.get().lower() != "none":
+            for i in actorList:
+                if self.actor2Menu.get().lower() in i.lower() and i.lower() != self.actor1Menu.get().lower() and i.lower() != self.actor3Menu.get().lower():
+                    listActorNew.append(i)
+        else:
+            for i in actorList:
+                if i.lower() != self.actor1Menu.get().lower() and i.lower() != self.actor3Menu.get().lower():
+                    listActorNew.append(i)
+        
         self.actor2Menu.configure(values=listActorNew)
         self.actor2Result.configure(text="Number of records: " + str(len(listActorNew)))
+        self.updateActor3()
     
     #method that creates new listActorNew list and gets all values from ActorList that have string which user typed
     def updateActor3(self, *args):
         listActorNew = []
-        for i in actorList:
-            if self.actor3Menu.get().lower() in i.lower():
-                listActorNew.append(i)
+        if self.actor3Menu.get().lower() != "none":
+            for i in actorList:
+                if self.actor3Menu.get().lower() in i.lower() and i.lower() != self.actor1Menu.get().lower() and i.lower() != self.actor2Menu.get().lower():
+                    listActorNew.append(i)
+        else:
+            for i in actorList:
+                if i.lower() != self.actor1Menu.get().lower() and i.lower() != self.actor2Menu.get().lower():
+                    listActorNew.append(i)
+        
         self.actor3Menu.configure(values=listActorNew)
         self.actor3Result.configure(text="Number of records: " + str(len(listActorNew)))
     
